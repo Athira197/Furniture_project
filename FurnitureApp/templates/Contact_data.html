@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="row ">
+              <div class="col-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">View Contact Details</h4>
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+
+                            <th> First Name </th>
+                            <th> Last Name </th>
+                            <th>  Mobile </th>
+                            <th>  Email </th>
+                            <th>  Message </th>
+                            <th>Actions</th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {% for i in info %}
+                          <tr>
+                            <td> {{i.FirstName}} </td>
+                            <td> {{i.LastName}} </td>
+                            <td>{{i.Mobile}}</td>
+                            <td>{{i.Email}}</td>
+                            <td>{{i.Message}}</td>
+                            <td>
+                              <div class="d-flex align-items-center">
+                                <a class="btn btn-danger btn-sm btn-icon-text" href="{% url 'delete_contact' c_id=i.id %}">Delete</a>
+                              </div>
+                            </td>
+                          </tr>
+                        {% endfor %}
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Add Product Details here...!</h4>
+                    <form class="forms-sample" method="post" action="{% url 'save_pro' %}" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      <div class="form-group">
+                      <label for="exampleFormControlSelect2">Product Category</label>
+                      <select class="form-control" id="exampleFormControlSelect2" name="pcat">
+                        <option>Please select a Category</option>
+                        {% for i in cat %}
+                        <option>{{i.Category}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                      <div class="form-group">
+                        <label for="exampleInputName1">Product Name</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="product name" name="pname">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail3">Quantity</label>
+                        <input type="number" class="form-control" id="exampleInputEmail3" placeholder="quantity" min="1" name="quantity">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPassword4">MRP</label>
+                        <input type="text" class="form-control" id="exampleInputPassword4" placeholder="MRP" name="mrp">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleTextarea1">Description</label>
+                        <textarea class="form-control" id="exampleTextarea1" rows="4" name="desc"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputName1">Country of Origin</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="origin" name="origin">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputCity1">Manufactured By</label>
+                        <input type="text" class="form-control" id="exampleInputCity1" placeholder="manufacture" name="manufacture">
+                      </div>
+                      <div class="form-group">
+                        <label>Image1</label>
+<!--                        <input type="file" name="img[]" class="file-upload-default">-->
+                        <div class="input-group col-xs-12">
+                          <input type="file" class="form-control" name="img1">
+
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label>Image2</label>
+<!--                        <input type="file" name="img[]" class="file-upload-default">-->
+                        <div class="input-group col-xs-12">
+                          <input type="file" class="form-control" name="img2">
+
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label>Image3</label>
+<!--                        <input type="file" name="img[]" class="file-upload-default">-->
+                        <div class="input-group col-xs-12">
+                          <input type="file" class="form-control" name="img3">
+
+                        </div>
+                      </div>
+                      <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                      <button class="btn btn-dark">Cancel</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+{% if messages %}
+   {% for i in messages %}
+       {% if i.tags == 'success' %}
+           <script>
+               swal('{{i}}','', 'success');
+           </script>
+       {% elif i.tags == 'error' %}
+           <script>
+               swal('{{i}}','', 'error');
+           </script>
+       {% elif i.tags == 'warning' %}
+           <script>
+               swal('{{i}}','', 'warning');
+           </script>
+       {% else %}
+            <script>
+                swal('{{i}}','','info');
+            </script>
+       {% endif %}
+   {% endfor %}
+{% endif %}
+
+</body>
+</html>
+{% endblock %}

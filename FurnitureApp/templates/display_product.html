@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="row ">
+              <div class="col-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">View Product Details</h4>
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                              <th>Product Category</th>
+                              <th>Product Name</th>
+                              <th>Quantity</th>
+                              <th>MRP</th>
+                              <th>Description</th>
+                              <th>Origin</th>
+                              <th>Manufacture</th>
+                              <th> Image1 </th>
+                              <th> Image2 </th>
+                              <th> Image3 </th>
+                              <th>Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {% for i in pro %}
+                          <tr>
+                              <td> {{i.Product_Category}} </td>
+                              <td> {{i.Product_Name}} </td>
+                              <td>{{i.Quantity}}</td>
+                              <td>{{i.MRP}}</td>
+                              <td>{{i.Description}}</td>
+                              <td>{{i.Origin}}</td>
+                              <td>{{i.Manufacture}}</td>
+                              <td>
+                                 <img src="{{i.Image1.url}}">
+                              </td>
+                              <td>
+                                  <img src="{{i.Image2.url}}">
+                              </td>
+                              <td>
+                                  <img src="{{i.Image3.url}}">
+                              </td>
+
+                            <td>
+                              <div class="d-flex align-items-center">
+                                <a class="btn btn-success btn-sm btn-icon-text mr-3" href="{% url 'edit_pro' pro_id=i.id %}">Edit</a>
+                                <a class="btn btn-danger btn-sm btn-icon-text" href="{% url 'delete_pro' p_id=i.id %}">Delete</a>
+                              </div>
+                            </td>
+                          </tr>
+                        {% endfor %}
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+{% if messages %}
+   {% for i in messages %}
+       {% if i.tags == 'success' %}
+           <script>
+               swal('{{i}}','', 'success');
+           </script>
+       {% elif i.tags == 'error' %}
+           <script>
+               swal('{{i}}','', 'error');
+           </script>
+       {% elif i.tags == 'warning' %}
+           <script>
+               swal('{{i}}','', 'warning');
+           </script>
+       {% else %}
+            <script>
+                swal('{{i}}','','info');
+            </script>
+       {% endif %}
+   {% endfor %}
+{% endif %}
+</body>
+</html>
+{% endblock %}
